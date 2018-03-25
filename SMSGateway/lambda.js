@@ -6,6 +6,8 @@ exports.handler = function (event, context, callback) {
 	let sender = event['sender'];
 	let message = event['message'];
 
+	let isPromotional = true;
+
 	console.log("Sending message", message, "to receiver", receiver);
 
 	sns.publish({
@@ -13,7 +15,7 @@ exports.handler = function (event, context, callback) {
 		MessageAttributes: {
 			'AWS.SNS.SMS.SMSType': {
 				DataType: 'String',
-				StringValue: 'Promotional'
+				StringValue: isPromotional ? 'Promotional' : 'Transactional'
 			},
 			'AWS.SNS.SMS.SenderID': {
 				DataType: 'String',
@@ -28,6 +30,6 @@ exports.handler = function (event, context, callback) {
 		})
 		.catch(err => {
 			console.log("Sending failed", err);
-			callback(null);
+			callback(err);
 		});
 }
