@@ -36,8 +36,8 @@
           "layers": []
         },
         "cursor": {
-          "lineNumber": 19,
-          "column": 25
+          "lineNumber": 1,
+          "column": 1
         }
       }
     },
@@ -75,6 +75,18 @@
           ]
         },
         "globallyEditable": false
+      },
+      "snsusEast1TestSNS": {
+        "name": "snsusEast1TestSNS",
+        "type": "SNS",
+        "config": {
+          "topicMode": 1,
+          "topicName": "TestSNS",
+          "topicArn": "arn:aws:sns:us-east-1:318300609668:TestSNS",
+          "topicRegion": "us-east-1",
+          "snsType": 0,
+          "subscriptions": []
+        }
       }
     },
     "customTemplate": {
@@ -93,7 +105,13 @@
     ],
     "packageJSON": {
       "dependencies": {
-        
+        "aws-sdk": {
+          "name": "aws-sdk",
+          "language": "nodejs",
+          "version": "2.644.0",
+          "dev": true,
+          "notRemovable": false
+        }
       }
     },
     "rootNode": "3baca06b-3017-4731-b88a-91b2c975f614",
@@ -108,7 +126,7 @@
     "platform": "AWS",
     "language": "nodejs",
     "platformRegions": {},
-    "lastSave": 1591762406547
+    "lastSave": 1591762785757
   },
   "VCS_STATE": {
     "provider": "GitHub",

@@ -1,9 +1,8 @@
 {
   "name": "SMSGateway",
   "version": "1.0.0",
-  "dependencies": {
-    "aws-sdk": "2.176.0",
-    "@slappforge/slappforge-sdk": "0.0.3"
-  },
-  "devDependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "aws-sdk": "2.644.0"
+  }
 }
