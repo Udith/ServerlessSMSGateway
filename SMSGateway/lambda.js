@@ -1,6 +1,7 @@
 let AWS = require('aws-sdk');
 const sns = new AWS.SNS();
-exports.handler = function (event, context, callback) {
+
+exports.handler = async (event) => {
 
 	let receiver = event['receiver'];
 	let sender = event['sender'];
@@ -10,26 +11,27 @@ exports.handler = function (event, context, callback) {
 
 	console.log("Sending message", message, "to receiver", receiver);
 
-	sns.publish({
-		Message: message,
-		MessageAttributes: {
-			'AWS.SNS.SMS.SMSType': {
-				DataType: 'String',
-				StringValue: 'Promotional'
+	try {
+		let data = await sns.publish({
+			Message: message,
+			MessageAttributes: {
+				'AWS.SNS.SMS.SMSType': {
+					DataType: 'String',
+					StringValue: 'Promotional'
+				},
+				'AWS.SNS.SMS.SenderID': {
+					DataType: 'String',
+					StringValue: sender
+				},
 			},
-			'AWS.SNS.SMS.SenderID': {
-				DataType: 'String',
-				StringValue: sender
-			},
-		},
-		PhoneNumber: receiver
-	}).promise()
-		.then(data => {
-			console.log("Sent message to", receiver);
-			callback(null, data);
-		})
-		.catch(err => {
-			console.log("Sending failed", err);
-			callback(err);
-		});
+			PhoneNumber: receiver
+		}).promise();
+
+		console.log("Sent message to", receiver);
+		return data;
+
+	} catch (err) {
+		console.log("Sending failed", err);
+		throw err;
+	}
 }
